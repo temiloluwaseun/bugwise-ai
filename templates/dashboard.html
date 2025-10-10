@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BugWise Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <!-- SIDEBAR -->
+  <div class="flex min-h-screen">
+    <aside class="w-64 bg-indigo-700 text-white flex flex-col p-4">
+      <h2 class="text-2xl font-bold mb-8">🐞 BugWise</h2>
+      <nav class="flex flex-col gap-3">
+        <a href="#" class="hover:bg-indigo-600 p-2 rounded">Dashboard</a>
+        <a href="#" class="hover:bg-indigo-600 p-2 rounded">My Bugs</a>
+        <a href="#" class="hover:bg-indigo-600 p-2 rounded">New Report</a>
+        <a href="#" class="hover:bg-indigo-600 p-2 rounded">Teams</a>
+        <a href="#" class="hover:bg-indigo-600 p-2 rounded">Settings</a>
+      </nav>
+      <div class="mt-auto">
+        <a href="{{ url_for('logout') }}" class="bg-red-500 hover:bg-red-600 block text-center mt-6 py-2 rounded font-semibold">Logout</a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 p-6">
+      <header class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-semibold">Dashboard</h1>
+        <div class="flex items-center gap-3">
+          <span class="font-medium">👋 {{ session['username'] }}</span>
+          <img src="https://ui-avatars.com/api/?name={{ session['username'] }}&background=6366F1&color=fff" alt="user" class="w-10 h-10 rounded-full">
+        </div>
+      </header>
+
+      <!-- STATS CARDS -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white shadow rounded-xl p-4 border-l-4 border-indigo-500">
+          <h3 class="text-sm text-gray-500">Open Bugs</h3>
+          <p class="text-2xl font-bold mt-1">14</p>
+        </div>
+        <div class="bg-white shadow rounded-xl p-4 border-l-4 border-yellow-500">
+          <h3 class="text-sm text-gray-500">In Progress</h3>
+          <p class="text-2xl font-bold mt-1">6</p>
+        </div>
+        <div class="bg-white shadow rounded-xl p-4 border-l-4 border-green-500">
+          <h3 class="text-sm text-gray-500">Resolved</h3>
+          <p class="text-2xl font-bold mt-1">23</p>
+        </div>
+        <div class="bg-white shadow rounded-xl p-4 border-l-4 border-red-500">
+          <h3 class="text-sm text-gray-500">Critical</h3>
+          <p class="text-2xl font-bold mt-1">2</p>
+        </div>
+      </div>
+
+      <!-- BUG LIST -->
+      <section>
+        <h2 class="text-xl font-semibold mb-4">Recent Bug Reports</h2>
+        <div class="overflow-x-auto bg-white shadow rounded-xl">
+          <table class="min-w-full border-collapse text-sm">
+            <thead class="bg-indigo-100 text-gray-700">
+              <tr>
+                <th class="px-4 py-2 text-left">ID</th>
+                <th class="px-4 py-2 text-left">Title</th>
+                <th class="px-4 py-2 text-left">Status</th>
+                <th class="px-4 py-2 text-left">Priority</th>
+                <th class="px-4 py-2 text-left">Assigned To</th>
+                <th class="px-4 py-2 text-left">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="px-4 py-2">#001</td>
+                <td class="px-4 py-2">Login page crash</td>
+                <td class="px-4 py-2 text-yellow-600 font-semibold">In Progress</td>
+                <td class="px-4 py-2 text-red-500 font-bold">High</td>
+                <td class="px-4 py-2">Temi</td>
+                <td class="px-4 py-2">
+                  <button class="text-indigo-600 hover:underline">View</button>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="px-4 py-2">#002</td>
+                <td class="px-4 py-2">Report export not working</td>
+                <td class="px-4 py-2 text-green-600 font-semibold">Resolved</td>
+                <td class="px-4 py-2 text-yellow-500 font-bold">Medium</td>
+                <td class="px-4 py-2">Lillian</td>
+                <td class="px-4 py-2">
+                  <button class="text-indigo-600 hover:underline">View</button>
+                </td>
+              </tr>
+              <tr class="border-b hover:bg-gray-50">
+                <td class="px-4 py-2">#003</td>
+                <td class="px-4 py-2">Form validation missing</td>
+                <td class="px-4 py-2 text-red-600 font
