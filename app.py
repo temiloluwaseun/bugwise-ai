@@ -26,10 +26,24 @@ def register():
             flash("All fields are required!", "error")
             return redirect(url_for("register"))
 
-        # Save user data to file or database (for now we’ll just print)
-        print(f"User Registered: {username}, {email}")
+        from werkzeug.security import generate_password_hash
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Hash the password before saving
+        hashed_password = generate_password_hash(password)
+
+        # Insert new user into the database
+        cursor.execute(
+            "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+            (username, email, hashed_password)
+        )
+        conn.commit()
+        conn.close()
+
         flash("Registration successful! You can now login.", "success")
         return redirect(url_for("login"))
+
     return render_template("register.html")
 
 @app.route("/login", methods=["GET", "POST"])
